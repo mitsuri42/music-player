@@ -79,7 +79,6 @@ const allSongs = [
 ];
 
 const audio = new Audio();
-
 let userData = {
   songs: [...allSongs],
   currentSong: null,
@@ -107,3 +106,5 @@ const renderSongs = (array) => {
 
   playlistSongs.innerHTML = songsHTML;
 };
+
+renderSongs(userData?.songs);
