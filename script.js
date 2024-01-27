@@ -103,14 +103,23 @@ const playSong = (id) => {
 
 const pauseSong = () => {
   userData.songCurrentTime = audio.currentTime;
-
+  
   playButton.classList.remove("playing");
   audio.pause();
 };
 
+const playNextSong = () => {
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  } else {
+    const currentSongIndex = getCurrentSongIndex();
+    
+  }
+};
+
 const renderSongs = (array) => {
   const songsHTML = array
-    .map((song) => {
+    .map((song)=> {
       return `
       <li id="song-${song.id}" class="playlist-song">
       <button class="playlist-song-info" onclick="playSong(${song.id})">
@@ -133,13 +142,13 @@ const renderSongs = (array) => {
 const getCurrentSongIndex = () => userData?.songs.indexOf(userData.currentSong);
 
 playButton.addEventListener("click", () => {
-  if (userData?.currentSong === null) {
+    if (userData?.currentSong === null) {
     playSong(userData?.songs[0].id);
   } else {
     playSong(userData?.currentSong.id);
   }
 });
 
-pauseButton.addEventListener("click", pauseSong);
+pauseButton.addEventListener("click",  pauseSong);
 
 renderSongs(userData?.songs);
