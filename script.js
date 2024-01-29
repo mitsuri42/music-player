@@ -113,9 +113,23 @@ const playNextSong = () => {
     playSong(userData?.songs[0].id);
   } else {
     const currentSongIndex = getCurrentSongIndex();
-    
+    const nextSong = userData?.songs[currentSongIndex + 1];
+
+    playSong(nextSong.id);
   }
 };
+
+const playPreviousSong = () => {
+   if (userData?.currentSong === null) return;
+   else {
+    const currentSongIndex = getCurrentSongIndex();
+    const previousSong = userData?.songs[currentSongIndex - 1];
+
+    playSong(previousSong.id);
+   }
+};
+
+
 
 const renderSongs = (array) => {
   const songsHTML = array
@@ -150,5 +164,9 @@ playButton.addEventListener("click", () => {
 });
 
 pauseButton.addEventListener("click",  pauseSong);
+
+nextButton.addEventListener("click", playNextSong);
+
+previousButton.addEventListener("click", playPreviousSong);
 
 renderSongs(userData?.songs);
